@@ -1,0 +1,153 @@
+# don't display the copyright page
+startup_message off
+
+# This is how one can set a reattach password:
+# password ODSJQf.4IJN7E    # "1234"
+
+# make the shell in every window a login shell
+shell -$SHELL
+
+# detach on hangup
+autodetach on
+
+activity "active: %n (%t) [%w:%s]"
+
+# bell
+vbell off
+vbell_msg "[[[ ding ]]]"
+#bell "bell: %n (%t) [%w:%s]^G"
+
+# 1 second messages
+msgwait 1
+
+# scrolling
+defscrollback 10000
+
+# auto-log
+logfile $HOME/tmp/screens/%Y%m%d-%n.log
+deflog off
+deflogin on
+
+# encoding
+defutf8 on
+encoding UTF-8
+
+# enable support for the "alternate screen" capability in all windows
+altscreen on
+
+# hardstatus
+# advertise hardstatus support to $TERMCAP
+# termcapinfo  * '' 'hs:ts=\E_:fs=\E\\:ds=\E_\E\\'
+# set every new windows hardstatus line to somenthing descriptive
+# defhstatus "screen: ^En (^Et)"
+# hardstatus alwayslastline "%{= dd} %=%-w[%n %t]%+w"
+# caption always "%{= dd}%{b}[ %=%{w}%?%-Lw%?%{b}(%{W}%n*%f %t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{b}][%{B} %H %{W}%l %{b}]"
+# hardstatus alwayslastline  "%{b kB} %?%-w%?%{r}%n%f %t%{b kB} %?%+w%? %= %l   %D %d/%m/%Y   %0c [%H]"
+# hardstatus alwayslastline  "%{b kB} %?%-w%?%{+b}%n%f %t%{-b} %?%+w%? %= %l   %D %d/%m/%Y   %0c %{-b rk} [%H]"
+# hardstatus alwayslastline '%{= kG}[ %{G}%H %l ]%{g}[%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %Y-%m-%d %{W}%C%a %{g}]'
+# hardstatus alwayslastline "%{kw}(%H) %-w%{kG}[%n %t]%{kw}%+w%=%{kC}%D %M %c"
+# hardstatus alwayslastline '%{= kG}[ %{y}%H %{g}][%15= %>%-Lw%40>%{r}(%{W}%n*%f %t%?(%u)%?%{r})%{g}%+Lw%-22< ][%{c} %Y-%m-%d %c %{g}]'
+hardstatus alwayslastline  "%{b kB}[%H".your.domain"] %= %?%-w%?%{r}%n%f %t%{b kB} %?%+w%? %= %{b kgrey}%d/%m/%Y %0c"
+hardstatus on
+
+# key bindings
+# Use C-z instead of C-a as this makes more sense for Emacs
+escape ^za
+bindkey "^[Od" prev
+bindkey "^[Oc" next
+# bindkey "^x"   detach
+# bindkey "^z"   quit
+
+# miscellaneous
+# idle 120 lockscreen
+# defbce on
+defflow off
+nonblock on
+# console off
+# sorendition +b kG
+
+# These apps are started up on default when a new screen-session is started.
+screen -t "bookmarks" 0 sh -c 'ZSH_DIRECTORY=$HOME/public_html/BOOKMARKS zsh -l'
+screen -t "emacs.d" 1 sh -c 'ZSH_DIRECTORY=$HOME/.emacs.d zsh -l'
+screen -t "org" 2 sh -c 'ZSH_DIRECTORY=$HOME/emacs-datas/org zsh -l'
+screen -t "public_html" 3 sh -c 'ZSH_DIRECTORY=$HOME/public_html zsh -l'
+screen -t "LaTeX" 4 sh -c 'ZSH_DIRECTORY=$HOME/tmp/LaTeX zsh -l'
+screen -t "zshrc.d" 5 sh -c 'ZSH_DIRECTORY=$HOME/.zshrc.d zsh -l'
+screen -t "tmp" 6 sh -c 'ZSH_DIRECTORY=$HOME/tmp zsh -l'
+screen -t "Downloads" 7 sh -c 'ZSH_DIRECTORY=$HOME/Downloads zsh -l'
+
+# term screen-256color
+term rxvt
+
+terminfo rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# termcapinfo rxvt|rxvt-unicode|urxvt|rxvt-256color|screen|xs|rxvt ti@:te@
+
+
+################
+#
+# xterm tweaks
+#
+
+# xterm understands both im/ic and doesn't have a status line.
+# Note: Do not specify im and ic in the real termcap/info file as
+# some programs (e.g. vi) will not work anymore.
+termcap  xterm hs@:cs=\E[%i%d;%dr:im=\E[4h:ei=\E[4l
+terminfo xterm hs@:cs=\E[%i%p1%d;%p2%dr:im=\E[4h:ei=\E[4l
+
+# 80/132 column switching must be enabled for ^AW to work
+# change init sequence to not switch width
+termcapinfo  xterm Z0=\E[?3h:Z1=\E[?3l:is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l
+
+# Make the output buffer large for (fast) xterms.
+termcapinfo xterm* OL=10000
+
+# tell screen that xterm can switch to dark background and has function
+# keys.
+termcapinfo xterm 'VR=\E[?5h:VN=\E[?5l'
+termcapinfo xterm 'k1=\E[11~:k2=\E[12~:k3=\E[13~:k4=\E[14~'
+termcapinfo xterm 'kh=\E[1~:kI=\E[2~:kD=\E[3~:kH=\E[4~:kP=\E[H:kN=\E[6~'
+
+# special xterm hardstatus: use the window title.
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+# terminfo xterm 'vb=\E[?5h$<200/>\E[?5l'
+termcapinfo xterm 'vi=\E[?25l:ve=\E[34h\E[?25h:vs=\E[34l'
+
+# emulate part of the 'K' charset
+termcapinfo xterm 'XC=K%,%\E(B,[\304,\\\\\326,]\334,{\344,|\366,}\374,~\337'
+
+# xterm-52 tweaks:
+# - uses background color for delete operations
+termcapinfo xterm ut
+
+
+################
+#
+# wyse terminals
+#
+
+# wyse-75-42 must have flow control (xo = "terminal uses xon/xoff")
+# essential to have it here, as this is a slow terminal.
+termcapinfo wy75-42 xo:hs@
+
+# New termcap sequences for cursor application mode.
+termcapinfo wy* CS=\E[?1h:CE=\E[?1l:vi=\E[?25l:ve=\E[?25h:VR=\E[?5h:VN=\E[?5l:cb=\E[1K:CD=\E[1J
+
+
+################
+#
+# other terminals
+#
+
+# make hp700 termcap/info better
+termcapinfo  hp700 'Z0=\E[?3h:Z1=\E[?3l:hs:ts=\E[62"p\E[0$~\E[2$~\E[1$}:fs=\E[0}\E[61"p:ds=\E[62"p\E[1$~\E[61"p:ic@'
+
+# Extend the vt100 desciption by some sequences.
+termcap  vt100* ms:AL=\E[%dL:DL=\E[%dM:UP=\E[%dA:DO=\E[%dB:LE=\E[%dD:RI=\E[%dC
+terminfo vt100* ms:AL=\E[%p1%dL:DL=\E[%p1%dM:UP=\E[%p1%dA:DO=\E[%p1%dB:LE=\E[%p1%dD:RI=\E[%p1%dC
+
+termcapinfo linux C8
+# old rxvt versions also need this
+# termcapinfo rxvt C8
+# don't display the copyright page
+startup_message off

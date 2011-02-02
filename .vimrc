@@ -27,7 +27,7 @@ filetype plugin indent on                         " detection automatique du typ
 autocmd FileType text setlocal textwidth=0        " les fichiers de type .txt sont limites a 72 caracteres par ligne
 autocmd FileType todo setlocal textwidth=0        " les fichiers de type .todo sont limites a 72 caracteres par ligne
 set fileformats=unix,mac,dos                      " gestion des retours chariot en fonction du type de fichier
-set viewdir=/home/nimred/.vim/saveview/           " reertoire pour sauvegarder les vues, utiles pour les replis manuels
+set viewdir=/home/Nahra/.vim/saveview/           " reertoire pour sauvegarder les vues, utiles pour les replis manuels
 set cursorline                                    " afficher la ligne courante
 set foldcolumn=2                                  " repee visuel pour les folds
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'            " impleentation de ctags, neessaire pour le plugin 'taglist'

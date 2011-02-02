@@ -10,9 +10,9 @@
 (erc-autojoin-mode 1)
 (setq erc-autojoin-channels-alist
       '(
-        (".*\\.freenode.net" "#math" "##opera" "#mplayer" "#xmonad" "#xorg" "#nouveau" "#screen" "#rxvt-unicode" "#zsh" "#emacs" "#emacsfr" "#vim" "##sed" "##c" "##java" "#python" "#ocaml" "#haskell" "#ruby" "#Perl" "#latex" "#gentoo" "#archlinux" "#archlinux-fr" "#gcu" "#ezunix" "#OpenBSD" "##freebsd" "#pkgsrc" "##NetBSD-br" "#NetBSDfr" "#netbsd-code" "#NetBSD")
+        (".*\\.freenode.net" "#mplayer" "#xmonad" "#xorg") 
         ("irc.belwue.de" "#NetBSD")
-        ("irc.efnet.fr" "#NetBSD" "#dragonflybsd" "#tex")
+        ("irc.efnet.fr" "#NetBSD" "#tex")
         (".*\\.gimp.org" "#NetBSD.se")
         (".*\\.oftc.net" "#pwmt")
         ("irc.quakenet.org" "#NetBSD")))

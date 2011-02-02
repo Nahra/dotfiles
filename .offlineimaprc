@@ -1,0 +1,31 @@
+[general]
+metadata = ~/.offlineimap
+accounts = your_account # for example Gmail-Nahra
+maxsyncaccounts = 6
+socktimeout = 120
+ui = TTY.TTYUI
+
+
+
+[Account your_account]
+localrepository = local-your_account # in our example : local-Gmail-Nahra
+remoterepository = remote-your_account # in our example : remote-Gmail-Nahra
+
+[Repository local-your_account]
+type = Maildir
+localfolders = ~/emacs-datas/gnus/Maildir/your_account
+
+[Repository remote-your_account]
+type = IMAP
+remotehost = imap.gmail.com
+remoteuser = your_gmail_mail_adress
+remotepass = your_password
+ssl = yes
+maxconnections = 1
+#folderfilter = lambda foldername: foldername in ['INBOX']
+nametrans = lambda folder: re.sub('.*Spam$', 'spam', re.sub('.*Drafts$', 'drafts', re.sub('.*Sent Mail$', 'sent', re.sub('.*Starred$', 'flagged', re.sub('.*Trash$', 'trash', re.sub('.*All Mail$', 'archive', folder))))))
+
+#Setting realdelete = yes will Really Delete email from the server.
+#Otherwise "deleting" a message will just remove any labels and 
+#retain the message in the All Mail folder.
+realdelete = no

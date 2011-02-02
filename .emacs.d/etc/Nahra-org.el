@@ -344,10 +344,6 @@
     (and (Nahra/weekday-p) (or (and (>= hour 8) (<= hour 11))
                                 (and (>= hour 13) (<= hour 16))))))
 
-(defun Nahra/network-p ()
-  (= 0 (call-process "/bin/ping" nil nil nil
-                     "-c1" "-q" "-t1" "maxtheon.info")))
-
 (defun Nahra/org-auto-exclude-function (tag)
   (and (cond
         ((string= tag "@home")
