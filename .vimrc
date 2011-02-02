@@ -1,16 +1,16 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "Diverses options
 """"""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible                                  " desactivation de la compatibilite avec vi
-set background=dark                               " fond sombre
-colorscheme literal_tango
-set laststatus=2                                  " ajoute une barre de status
-syntax enable                                     " activation de la coloration syntaxique
 "set termencoding=utf-8
 "set encoding=utf-8
 "set fileencoding=utf-8
 "set fileencodings=
 "set fileencodings=utf-8,latin1,iso-8859-15
+set nocompatible                                  " desactivation de la compatibilite avec vi
+set background=dark                               " fond sombre
+colorscheme literal_tango                         " literal_tango comme colorscheme
+set laststatus=2                                  " ajoute une barre de status
+syntax enable                                     " activation de la coloration syntaxique
 set number                                        " numeotation des lignes
 set autoindent                                    " indentation automatique avancee
 set smartindent                                   " indentation plus intelligente
@@ -31,7 +31,7 @@ set viewdir=/home/nimred/.vim/saveview/           " reertoire pour sauvegarder l
 set cursorline                                    " afficher la ligne courante
 set foldcolumn=2                                  " repee visuel pour les folds
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'            " impleentation de ctags, neessaire pour le plugin 'taglist'
-"set guioptions-=T                                " supprime la barre d'outils
+"set guioptions-=T                                 " supprime la barre d'outils
 set incsearch                                     " recherche incrementale
 set hlsearch                                      " surligne les resultats de la recherche
 
@@ -327,10 +327,11 @@ match Todo /<+.\++>/
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-"highlights
+"Highlights
 """"""""""""""""""""""""""""""""""""""""""""""""""
-au Syntax * syn match Error /\s\+$\| \+\ze\t/                       " extra whitespaces
-"au BufEnter * set cursorline | highlight! link CursorLine Error " couleur de fond pour la ligne courante
+au Syntax * syn match Error /\s\+$\| \+\ze\t/     " extra whitespaces
+" couleur de fond pour la ligne courante
+"au BufEnter * set cursorline | highlight! link CursorLine Error 
 
 "show tabs, EOL etc.
 "set list
@@ -339,11 +340,37 @@ au Syntax * syn match Error /\s\+$\| \+\ze\t/                       " extra whit
 
 "autocmd FileType make set noexpandtab
 
-"For example, you may have a code snippet which uses two-space indents, and you want to entab the indents (convert each leading group of two spaces to a tab). To do this, visually select the code (press V then j), then enter:
-" a utiliser avec : :'<,'>SuperRetab 2
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"Commandes
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"For example, you may have a code snippet which uses two-space indents,
+"and you want to entab the indents (convert each leading group of two 
+"spaces to a tab). To do this, visually select the code (press V then j),
+"then enter: :'<,'>SuperRetab 2
 :command! -nargs=1 -range SuperRetab <line1>,<line2>s/\v%(^ *)@<= {<args>}/\t/g
 
+" upload le fichier courant vers http://sprunge.us
 command -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://sprunge.us|xclip
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"Quelques mappings pour l'édition des bookmarks
+""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-X> o<DT><A HREF=""></A><ESC>F"
+map <C-C> o<TAB><DT><A HREF=""></A><ESC>F"
+map <C-B> o</DL><p><ESC>ko<TAB><DT><A HREF=""></A><ESC>ko<DL><p><ESC>ko<DT><H3></H3><ESC>F<i
+map <C-N> o<DT><A HREF=".//index.html"></A><ESC>2F/
+map <C-M> o<HR><ESC>
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"Mapping pour coller le buffer X
+""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <C-V> "*P
+
+
 
 ":map <F10> :set paste<CR>
 ":map <F11> :set nopaste<CR>
@@ -355,12 +382,3 @@ command -range=% Sprunge :<line1>,<line2>write !curl -F "sprunge=<-" http://spru
 ":set mouse=a
 ":set go+=a
 
-map <C-X> o<DT><A HREF=""></A><ESC>F"
-"map <C-X> o<DT><A HREF=""></A><ESC>F"i
-map <C-C> o<TAB><DT><A HREF=""></A><ESC>F"
-"map <C-C> o<TAB><DT><A HREF=""></A><ESC>F"i
-map <C-B> o</DL><p><ESC>ko<TAB><DT><A HREF=""></A><ESC>ko<DL><p><ESC>ko<DT><H3></H3><ESC>F<i
-map <C-N> o<DT><A HREF=".//index.html"></A><ESC>2F/
-map <C-M> o<HR><ESC>
-
-nmap <C-V> "*P
