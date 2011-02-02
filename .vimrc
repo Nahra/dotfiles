@@ -1,14 +1,4 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Fichier .vimrc de Nicolas Gressier
-" Cre le 11 mai 2006
-" Yoshidu62@gmail.com
-" Mise à jour : 22/08/2007
-" Version 2.5
-""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
 "Diverses options
 """"""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible                                  " desactivation de la compatibilite avec vi
@@ -77,8 +67,8 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 """""""""""""""""""""""""""""""""""""""""""""""""
 "Chargement des types de fichiers
 """"""""""""""""""""""""""""""""""""""""""""""""""
-"autocmd BufEnter *.txt set filetype=text             " chargement du type de fichier pour le format txt
-"autocmd BufEnter *.todo set filetype=todo            " chargement du type de fichier pour le format todo
+"autocmd BufEnter *.txt set filetype=text          " chargement du type de fichier pour le format txt
+"autocmd BufEnter *.todo set filetype=todo         " chargement du type de fichier pour le format todo
 
 
 
@@ -114,9 +104,9 @@ nnoremap <silent> <F9> :NERDTree<CR>
 "Mapping et configuration pour la liste des tags
 """"""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <F8> :TlistToggle<CR>
-let Tlist_Exit_OnlyWindow = 1       " vim se ferme si il reste uniquement la fenêtre des tags
-let Tlist_Process_File_Always = 1   " activation permanente du plugin pour la barre de statut
-let Tlist_Use_Right_Window = 1      " affiche les tags sur le côte droit de l'eran
+let Tlist_Exit_OnlyWindow = 1                     " vim se ferme si il reste uniquement la fenêtre des tags
+let Tlist_Process_File_Always = 1                 " activation permanente du plugin pour la barre de statut
+let Tlist_Use_Right_Window = 1                    " affiche les tags sur le côte droit de l'eran
 
 
 
@@ -194,9 +184,9 @@ imap \date  <C-R>=strftime("%d/%m/%Y")<CR>
 "Correction orthographique
 "Liste des propositions par CTRL-X_s
 """"""""""""""""""""""""""""""""""""""""""""""""""
-"set spellsuggest=5                                   " on affiche uniquement les 5 premiees propositions
-"autocmd BufEnter *.txt set spell                     " correction orthographique dans les fichiers textes
-"autocmd BufEnter *.txt set spelllang=fr              " correction orthographique dans les fichiers textes
+"set spellsuggest=5                                " on affiche uniquement les 5 premiees propositions
+"autocmd BufEnter *.txt set spell                  " correction orthographique dans les fichiers textes
+"autocmd BufEnter *.txt set spelllang=fr           " correction orthographique dans les fichiers textes
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
