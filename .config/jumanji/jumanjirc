@@ -1,0 +1,122 @@
+# browser settings
+set homepage http://pwmt.org
+set auto_save 60
+set default_session_name my_session
+#set width 1400
+#set height 700
+
+#set page_cache true
+#set private_browsing true
+#set scrollbars true
+
+# look
+#set font monospace normal 9
+set font terminus medium 9
+set inputbar_fgcolor #000000
+set scroll_step 15
+
+# key bindings
+#map <Up> quit
+#map <A-<Left>> nav_history previous normal
+map <Back> nav_history previous normal
+#map <A-<Right>> nav_history next normal
+map <Forward> nav_history next normal
+map <C-<Left>> nav_tabs previous normal
+map <C-<Right>> nav_tabs next normal
+map <S-<Up>> yank_title
+map <S-<Down>> yank
+map <PageUp> scroll full_up
+map <PageDown> scroll full_down
+map <C-.> focus_inputbar :open
+#map <C-l> focus_inputbar ":open " append_url
+
+# follow hint
+#script ~/.config/jumanji/scripts/input_hinting_mode.js
+#set scripts false # disable javascript
+
+# custom css
+#set stylesheet ~/.config/jumanji/style.css
+
+set download_dir ~/Downloads
+set download_command urxvtc -T Downloading -e sh -c "wget --load-cookies ~/.config/jumanji/cookies '%s' -O %s";
+set spawn_editor urxvtc -e sh -c "emacsclient -nw"
+
+# proxy
+#set proxy 127.0.0.1:8118
+
+# plugin activation
+#plugin application/x-shockwave-flash
+#plugin application/x-java-applet
+
+# search engines
+searchengine g http://www.google.com/search?q=%s
+searchengine 118 http://www.118000.fr/search?sb_Phone=%s
+searchengine allb http://www.allbookstores.com/search?type=isbn&q=%s
+searchengine amz http://redir.opera.com/amazon/?q=%s
+searchengine ap http://www.archlinux.org/packages/?q=%s
+searchengine ask http://redir.opera.com/ask/?q=%s
+searchengine aur http://aur.archlinux.org/packages.php?O=0&K=%s&do_Search=Go
+searchengine bin http://www.bing.com/search?q=%s&go=&form=QBRE&filt=all
+searchengine btt http://redir.opera.com/torrents/?q=%s
+#Bookmarks tile and body
+searchengine bktb http://bookmarks/cgi-bin/swish.cgi?query=%s&submit=Search+%21&metaname=swishdefault&sort=swishrank
+#Bookmarks document path
+searchengine bkdp http://bookmarks/cgi-bin/swish.cgi?query=%s&submit=Search%21&metaname=swishdocpath&h=swishrank
+#Bookmarks tile
+searchengine bkt http://bookmarks/cgi-bin/swish.cgi?query=%s&submit=Search+%21&metaname=swishtitle&sort=swishrank
+searchengine cpan http://search.cpan.org/search?query=%s&mode=all
+searchengine ctan http://www.ctan.org/cgi-bin/search.py?metadataSearch=%s&metadataSearchSubmit=Search
+searchengine d http://duckduckgo.com/?q=%s
+searchengine del http://delicious.com/search?p=%s&u=&chk=&context=all&fr=del_icio_us&lc=1
+searchengine dot http://dotfiles.org/search?q=%s
+searchengine down http://downforeveryoneorjustme.com/%s
+searchengine eba http://redir.opera.com/ebay/?q=%s
+searchengine em http://www.emacswiki.org/emacs/?search=%s
+searchengine emi http://www.emacswiki.org/cgi-bin/info-ref?find=%sdd
+searchengine fkr http://www.flickr.com/search/?q=%s
+searchengine m http://gmane.org/find.php?list=%s
+searchengine gith https://github.com/search?q=%s
+searchengine ga http://news.google.com/news?client=opera&rls=fr&q=%s&sourceid=opera&oe=utf-8&um=1&ie=UTF-8&hl=fr&sa=N&tab=ln #Google Actualites
+searchengine gb http://blogsearch.google.com/blogsearch?q=%s&hl=fr&ie=UTF-8&oe=utf-8&client=opera&rls=fr&sa=N&tab=pb #Google Blogs
+searchengine gg http://groups.google.com/groups?q=%s&hl=fr&ie=UTF-8&oe=utf-8&client=opera&rls=fr&sa=N&tab=vg
+searchengine gi http://images.google.com/images?client=opera&rls=fr&q=%s&sourceid=opera&oe=utf-8&um=1&ie=UTF-8&sa=N&hl=fr&tab=wi
+searchengine gla http://www.google.com/codesearch?hl=fr&start=10&sa=N&q=%s
+searchengine gli http://books.google.com/books?q=%s&hl=fr&ie=UTF-8&oe=utf-8&client=opera&rls=fr&sa=N&tab=gp
+searchengine gm http://maps.google.com/maps?client=opera&rls=fr&q=%s&sourceid=opera&oe=utf-8&um=1&ie=UTF-8&sa=N&hl=fr&tab=wl
+searchengine gvi http://docs.google.com/viewer?url=%s
+searchengine gps http://www.google.com/products?q=%s&aq=f
+searchengine gtef http://translate.google.com/translate_t?hl=fr#en|fr|%s
+searchengine gtfe http://translate.google.com/translate_t?hl=fr#fr|en|%s
+searchengine gv http://video.google.com/videosearch?q=%s&hl=fr&ie=UTF-8&oe=utf-8&client=opera&rls=fr&tab=nv#
+searchengine gw http://www.google.com/search?q=%s&sourceid=opera&num=%i&ie=utf-8&oe=utf-8
+searchengine fac http://www.facebook.com/people-index/%s
+searchengine is http://is.gd/create.php?longurl=%s
+searchengine isbn http://www.bookfinder4u.com/IsbnSearch.aspx?isbn=%s
+searchengine isbnc http://www.bookfinder4u.com/compare.aspx?isbn=%s
+searchengine hoo http://www.hooseek.com/web?recherche=%s
+searchengine n http://www.insanelymac.com/search.php?cx=001515782708938219747%3A_l4ohnzhaku&cof=FORID%3A9&ie=UTF-8&q=%s
+searchengine kel http://redir.opera.com/shopping/?q=%s
+searchengine kod http://www.koders.com/default.aspx?s=%s&btn=&la=%2A&li=%2A
+searchengine latx http://www.tug.org/texlive/Contents/live/texmf-dist/doc/latex/%s
+searchengine na http://www.google.com/custom?q=%s&cof=L%3Ahttp%3A%2F%2Fwww.NetBSD.org%2Fimages%2FNetBSD-smaller.png%3BLH%3A200%3BLW%3A200%3BAH%3Acenter%3BAWFID%3A4f6b0499f0f58d2c%3B&domains=NetBSD.org&sitesearch=NetBSD.org
+searchengine nm http://www.google.com/custom?q=%s&cof=L%3Ahttp%3A%2F%2Fwww.NetBSD.org%2Fimages%2FNetBSD-smaller.png%3BLH%3A200%3BLW%3A200%3BAH%3Acenter%3BAWFID%3A4f6b0499f0f58d2c%3B&domains=mail-index.NetBSD.org&sitesearch=mail-index.NetBSD.org
+searchengine nmp http://netbsd.gw.com/cgi-bin/man-cgi?%s++NetBSD-current
+searchengine np http://www.netbsd.org/cgi-bin/pkgsrc-search.cgi?q=%s
+searchengine ns http://www.google.com/custom?q=%s&cof=L%3Ahttp%3A%2F%2Fwww.NetBSD.org%2Fimages%2FNetBSD-smaller.png%3BLH%3A200%3BLW%3A200%3BAH%3Acenter%3BAWFID%3A4f6b0499f0f58d2c%3B&domains=www.NetBSD.org&sitesearch=www.NetBSD.org
+searchengine opp http://www.openports.se/search.php?so=%s
+searchengine ogn http://opengrok.netbsd.org/source/search?q=%s&defs=&refs=&path=&hist=
+searchengine pdf http://www.pdf-search-engine.com/%s-pdf.html
+searchengine pdg http://www.prodigylink.com/searchparty/#%s
+searchengine pin http://pinboard.in/search/?query=%s&all=Search+All
+searchengine pks http://pkgsrc.se/search.php?so=%s
+searchengine spks http://search.pkgsrc.se/%s
+searchengine ti http://tinyurl.com/create.php?url=%s
+searchengine wa http://web.archive.org/web/*/%s
+searchengine we http://en.wikipedia.org/wiki/Special:Search?search=%s
+#searchengine we   https://secure.wikimedia.org/wikipedia/en/w/index.php?search=%s
+searchengine wf http://fr.wikipedia.org/wiki/Special:Search?search=%s
+searchengine wef http://www.wordreference.com/enfr/%s
+searchengine wfe http://www.wordreference.com/fren/%s
+searchengine yah http://yahoo.opera.com/search/?q=%s&fr=opera2
+searchengine you http://www.youtube.com/results?q=%s&hl=fr&ie=UTF-8&oe=utf-8&client=opera&rls=fr&sa=N&tab=b1
+searchengine yub http://www.yubnub.org/parser/parse?command=%s

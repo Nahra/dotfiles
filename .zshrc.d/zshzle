@@ -1,0 +1,17 @@
+# Edit the command line using your usual editor.
+zle -N edit-command-line
+
+# Setting abbreviation like 'iab' with Vim
+#zle -N my-expand-abbrev
+
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+
+kill-line() { zle .kill-line ; echo -n $CUTBUFFER | xclip -i }
+zle -N kill-line # bound on C-k
+
+yank() { LBUFFER=$LBUFFER$(xclip -o) }
+zle -N yank # bound on C-y
+
+run-with-sudo() { LBUFFER="sudo $LBUFFER" }
+zle -N run-with-sudo

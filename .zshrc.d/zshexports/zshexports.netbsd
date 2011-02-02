@@ -1,0 +1,172 @@
+#if [[ $TTY = /dev/pts* ]] ; then
+    export LANG="fr_FR.UTF-8"
+    export LC_CTYPE="fr_FR.UTF-8"
+    export LC_COLLATE="C"
+    export LC_TIME="C"
+    export LC_NUMERIC="C"
+    export LC_MONETARY="C"
+    export LC_MESSAGES="fr_FR.UTF-8"
+    export LC_ALL=""
+#fi
+
+if [ "$(tty)" = "/dev/console" -o "$(tty)" = "/dev/ttyE1" -o "$(tty)" = "/dev/ttyE2" -o "$(tty)" = "/dev/ttyE3" ] ; then
+    TERM=wsvt25
+    #else TERM=xterm-color
+    else TERM=rxvt
+fi
+#COLORTERM=xterm
+#COLORFGBG=
+#TERMINFO=$HOME/.terminfo
+
+
+#"/usr/pkg/java/openjdk7" ou "/usr/pkg/java/sun-6"
+#JVM="/usr/pkg/java/sablevm" \
+for var in \
+    JAVA_HOME="/usr/pkg/java/openjdk7" \
+    JDK_HOME="/usr/pkg/java/openjdk7" \
+    JRE_HOME="/usr/pkg/java/openjdk7/jre" \
+    JAVAWS_HOME="/usr/pkg/java/openjdk7" \
+    CLASSPATH="${JAVA_HOME}/lib" \
+    _JAVA_AWT_WM_NONREPARENTING=1
+do
+    export $var
+done
+
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+#/usr/X11R7/bin \
+for mdir in \
+    /usr/games \
+    /usr/pkg/bin \
+    /usr/pkg/sbin \
+    ${JAVA_HOME}/bin \
+    /usr/pkg/lib/scilab-4.1/bin \
+    /usr/local/bin \
+    /usr/local/sbin \
+    /usr/local/texlive/2010/bin/i386-netbsd \
+    ${JAVA_HOME}/bin \
+    ${HOME}/bin \
+    ${HOME}/scripts \
+    ${HOME}/.cabal/bin
+do
+    [ -d "${mdir}" ] && PATH="${PATH}:${mdir}"
+done
+
+# For non-root users, add the current directory to the search path:
+if [ ! "`/usr/bin/id -u`" = "0" ]; then
+    PATH="$PATH:."
+fi
+
+# For root users, ensure that /usr/local/sbin, /usr/sbin, and /sbin are in
+if [ "`/usr/bin/id -u`" = "0" ]; then
+    echo $PATH | grep /usr/pkg/sbin 1> /dev/null 2> /dev/null
+    if [ ! $? = 0 ]; then
+    PATH=/usr/pkg/sbin:/usr/sbin:/sbin:$PATH
+    fi
+fi
+
+
+LIBRARY_PATH="/usr/lib"
+#/usr/X11R7/lib \
+for mdir in \
+    /usr/pkg/lib \
+    /usr/local/lib
+do
+    [ -d "${mdir}" ] && LIBRARY_PATH="${LIBRARY_PATH}:${mdir}"
+done
+
+
+#/usr/X11R7/lib:/usr/local/lib ?
+(( ${+LD_LIBRARY_PATH} )) || export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/pkg/lib"
+
+
+#/usr/X11R7/include:/usr/local/include ?
+(( ${+INCLUDEPATH} )) || export INCLUDEPATH="${INCLUDEPATH}:/usr/pkg/include"
+
+C_INCLUDE_PATH="/usr/include"
+#/usr/local/include
+for mdir in \
+    /usr/pkg/include \
+    /usr/pkg/include/xorg \
+    /usr/pkg/qt3/include \
+    /usr/pkg/qt4/include
+do
+    [ -d "${mdir}" ] && C_INCLUDE_PATH="${C_INCLUDE_PATH}:${mdir}"
+done
+
+#-I/usr/X11R7/include
+(( ${+CFLAGS} )) || export CFLAGS="-I/usr/pkg/include"
+
+
+#/usr/local/include
+(( ${+CPPFLAGS} )) || export CPPFLAGS=$CFLAGS
+
+
+#(( ${+PKG_PATH} )) || export PKG_PATH="ftp://ftp.netbsd.org/pub/pkgsrc/packages/NetBSD/$(uname -m)/5.0.2_2010Q2/All"
+#(( ${+PKG_PATH} )) || export PKG_PATH="ftp://ftp.netbsd.org/pub/NetBSD/packages/$(uname -r)/i386/All/"
+#PKG_PATH=ftp://ftp.fr.netbsd.org/pub/pkgsrc/packages/NetBSD/i386/5.0.1_2009Q3
+#PKG_PATH=file:///usr/pkgsrc/packages/All
+
+
+(( ${+CVSROOT} )) || export CVSROOT=":pserver:anoncvs@anoncvs.fr.NetBSD.org:/pub/NetBSD-CVS"
+
+
+MANPATH="/usr/share/man:/usr/pkg/man:/usr/local/share/man"
+#/usr/X11R7/man \
+for mdir in \
+    /usr/tools/man \
+    /usr/pkg/man \
+    /usr/pkg/qt3/man \
+    /usr/pkg/cross/man \
+    /usr/pkg/lib/perl5/man \
+    /usr/pkg/lib/perl5/vendor_perl/man \
+    /usr/pkg/lib/erlang/man \
+    ${JAVA_HOME}/man \
+    /usr/src/gnu/dist/gettext/gettext-tools/man \
+    /usr/local/texlive/2010/texmf/doc/man \
+    ${HOME}/share/man
+do
+    [ -d "${mdir}" ] && MANPATH="${MANPATH}:${mdir}"
+done
+
+
+INFOPATH="/usr/share/info/"
+for mdir in \
+    /usr/pkg/info \
+    /usr/local/texlive/2010/texmf/doc/info \
+    ${HOME}/info
+do
+    [ -d "${mdir}" ] && INFOPATH="${INFOPATH}:${mdir}"
+done
+
+
+#export GREP_OPTIONS='--color=auto' GREP_COLOR='01;31'
+
+
+if [ -d "/usr/pkg/share/vim/vim$VIMRELEASE" ] ; then
+    export VIMRUNTIME="/usr/pkg/share/vim/vim$VIMRELEASE"
+fi
+
+
+# allow me to cd directly into a dir in $PORTS_DIR from anywhere
+#  $ cd shells && pwd
+#  /usr/ports/shells
+if [ -d "/usr/pkgsrc" ]; then
+    (( ${+PORTS_DIR} )) || export PORTS_DIR="/usr/pkgsrc"
+fi
+
+
+export PKG_ONLINE_SERVER=localhost
+export PKG_ONLINE_PORT=2628
+export PKG_ONLINE_NETCAT=/usr/pkg/sbin/nc
+export PKG_SUMMARY_TYPE=src
+
+
+#for alias in \
+#    ls='gls -F -h --color=auto' \
+#    cls='colorls -G -F'
+#do
+#    alias $alias
+#done
+
+

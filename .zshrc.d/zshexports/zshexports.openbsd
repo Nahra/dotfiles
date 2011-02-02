@@ -1,0 +1,26 @@
+#export TERM=xterm
+
+
+export LANG=POSIX
+
+
+(( ${+CVSROOT} )) || export CVSROOT="anoncvs@mirror.osn.de:/cvs"
+
+
+(( ${+PKG_PATH} )) || export PKG_PATH="ftp://ftp-stud.fht-esslingen.de/pub/OpenBSD/4.4/packages/i386"
+#(( ${+PKG_PATH} )) || export PKG_PATH="ftp://ftp.freenet.de/pub/ftp.openbsd.org/pub/OpenBSD/$(uname -r)/packages/$(uname -m)/"
+#(( ${+PKG_PATH} )) || export PKG_PATH="ftp://openbsd.ftp.fu-berlin.de/pub/OpenBSD/$(uname -r)/packages/$(uname -m)/"
+
+
+if [ -d "/usr/local/share/vim/vim$VIMRELEASE" ] ; then
+    export VIMRUNTIME="/usr/local/share/vim/vim$VIMRELEASE"
+fi
+
+
+# OpenBSD, FreeBSD and CRUX are evil ;)
+# allow me to cd directly into a dir in $PORTS_DIR from anywhere
+#  $ cd shells && pwd
+#  /usr/ports/shells
+if [ -d "/usr/ports" ]; then
+    (( ${+PORTS_DIR} )) || export PORTS_DIR="/usr/ports"
+fi

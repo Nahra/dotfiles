@@ -1,0 +1,99 @@
+#export LANG="en_US"
+#export LC_MESSAGES="en_US.UTF-8"
+
+#"/usr/pkg/java/openjdk7" ou "/usr/pkg/java/sun-6"
+#JVM="/usr/pkg/java/sablevm" \
+#    JAVA_HOME="/usr/lib/jvm/java-6-openjdk" \
+#   _JAVA_AWT_WM_NONREPARENTING=1
+for var in \
+    JAVA_HOME="/opt/java" \
+    JDK_HOME="${JAVA_HOME}" \
+    JRE_HOME="${JAVA_HOME}/jre" \
+    JAVAWS_HOME="${JAVA_HOME}/jre/javaws" \
+    CLASSPATH="${JAVA_HOME}/lib"
+do
+    export $var
+done
+
+export CLOJURE_EXT=~/.clojure
+
+# {{{ PATH
+# /usr/X11R7/bin \
+#    ${HOME}/opt/clojure-contrib/launchers/bash \
+#    ${HOME}/.clojure \
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+for mdir in \
+    /usr/lib/perl5/core_perl/bin \
+    /usr/lib/perl5/vendor_perl/bin/ \
+    /usr/local/bin \
+    /usr/local/sbin \
+    /usr/local/texlive/2010/bin/x86_64-linux \
+    /usr/local/MATLAB/R2010b/bin \
+    /usr/local/maple13/bin \
+    /usr/local/maple13/bin.X86_64_LINUX \
+    /usr/lib/perl5/site_perl/bin \
+    ${JAVA_HOME}/bin \
+    /usr/share/java/apache-ant/bin \
+    /opt/maven/bin \
+    ${HOME}/opt/clojure-contrib/launchers/bash \
+    ${HOME}/opt/leiningen \
+    ${HOME}/bin \
+    ${HOME}/scripts \
+    ${HOME}/.cabal/bin
+do
+    [ -d "${mdir}" ] && PATH="${PATH}:${mdir}"
+done
+
+MANPATH="/usr/man:/usr/share/man:/usr/local/man"
+#/usr/X11R7/man \
+for mdir in \
+    /usr/tools/man \
+    ${JAVA_HOME}/man \
+    /usr/local/texlive/2010/texmf/doc/man \
+    ${HOME}/share/man
+do
+    [ -d "${mdir}" ] && MANPATH="${MANPATH}:${mdir}"
+done
+
+
+# For non-root users, add the current directory to the search path:
+#if [ ! "`/usr/bin/id -u`" = "0" ]; then
+#    PATH="$PATH:."
+#fi
+
+# For root users, ensure that /usr/local/sbin, /usr/sbin, and /sbin are in
+if [ "`/usr/bin/id -u`" = "0" ]; then
+    echo $PATH | grep /usr/pkg/sbin 1> /dev/null 2> /dev/null
+    if [ ! $? = 0 ]; then
+        PATH=/usr/pkg/sbin:/usr/sbin:/sbin:$PATH
+    fi
+fi
+
+export LD_LIBRARY_PATH=/usr/lib/jvm/java-6-openjdk/jre/lib/amd64/server/
+# LD_RUN_PATH
+# LIBDIR
+
+export OPERAPLUGINWRAPPER_PRIORITY=0
+export OPERA_KEEP_BLOCKED_PLUGIN=1
+
+#export JAVA_FONTS=/usr/share/fonts/TTF
+
+
+if [ -d "/usr/share/vim/vim$VIMRELEASE" ] ; then
+    export VIMRUNTIME="/usr/share/vim/vim$VIMRELEASE"
+fi
+
+
+[[ ${OS} = "linux" && -n ${(MS)$(ls --version 2>/dev/null)#GNU} ]] && ls_flags="--color"
+(ls --help 2>/dev/null |grep -- --color=) >/dev/null && alias ls='ls -b -CF --color=auto'
+   if [[ -x $(which gls) ]]; then
+           alias ls='gls --color=auto'
+#   elif
+#          [[ ${OS} = 'linux' -n ${(MS)$(ls --version | head -n 12>/dev/null)#GNU} ]]
+#   then
+#           export TIMESTYLE=$'--time-style="+\e[1;37m[\e[1;34m%Y-%m-%d %H:%M\e[1;37m]\e[0m"'
+#           alias ls="ls -b -CF --color=auto ${TIMESTYLE}"
+#   else
+   fi
+
+SGML_CATALOG_FILES=/home/Nahra/emacs-datas/DTDs/CATALOG

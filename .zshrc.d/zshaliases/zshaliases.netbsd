@@ -1,0 +1,21 @@
+# Only non-root need this aliases
+if (( EUID != 0 )); then
+    for alias in \
+        mso='make show-options' \
+        Sp='sudo pkgclean' \
+        Smcc='sudo make clean clean-depends' \
+        Smccd='sudo make clean clean-depends distclean' \
+        Smicc='sudo make install clean clean-depends' \
+        Smiccd='sudo make install clean clean-depends distclean' \
+        Smdcc='sudo make deinstall clean clean-depends' \
+        Smdccd='sudo make deinstall clean clean-depends distclean' \
+        upsrc="cvs -d $CVSROOT update -PAd src" \
+        csupsrc="sudo csup ~/.csup/sup/netbsd-src-supfile" \
+        uppkgsrc="cvs -d $CVSROOT update -PAd pkgsrc" \
+        csuppkgsrc="sudo csup ~/.csup/sup/netbsd-pkgsrc-supfile" \
+        csupwip="sudo csup ~/.csup/sup/netbsd-pkgsrc-wip-supfile"
+    do
+        alias $alias
+    done
+fi
+

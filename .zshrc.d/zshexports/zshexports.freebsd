@@ -1,0 +1,16 @@
+# This one is needed for FreeBSD because OSVERSION is defined in
+# /usr/ports/Mk/bsd.port.mk. Thx to Christian Mondabon for this "bugreport".
+if [ `uname -s` = "FreeBSD" ]; then
+    export OSVERSION="`/sbin/sysctl -n kern.osreldate`"
+else
+    (( ${+OSVERSION} )) || export OSVERSION="${OSTYPE#$OS}"             # **FIXME**
+fi
+
+
+# OpenBSD, FreeBSD and CRUX are evil ;)
+# allow me to cd directly into a dir in $PORTS_DIR from anywhere
+#  $ cd shells && pwd
+#  /usr/ports/shells
+if [ -d "/usr/ports" ]; then
+    (( ${+PORTS_DIR} )) || export PORTS_DIR="/usr/ports"
+fi

@@ -1,0 +1,112 @@
+# Radios
+# radios publiques
+# BBC Radio Scotland
+# BBC Radio Wales
+# BBC Radio Ulster
+# BBC Radio Cymru
+# BBC Radio London
+# BC World Service
+# BBC Asian Network
+# BBC 7
+# BBC 6 Music
+# BBC FiveLive Sports Extra
+# BBC Scotland :: Radio nan Gaidheal
+# BBC Radio 4 LW : Itelligent speech 
+# BBC FiveLive mms://wmlive.bbc.net.uk/wms/bbc_ami/radio5/radio5_bb_live_int_eq1_sl0?BBC-UID=e44a970b22ffbda06a4e058b91802eba1c90682640d091dff269e685b0547800&SSO2-UID=
+# BBC Radio 1 : The best new music mms://wmlive.bbc.net.uk/wms/bbc_ami/radio1/radio1_bb_live_int_eq1_sl0?BBC-UID=e44a970b22ffbda06a4e058b91802eba1c90682640d091dff269e685b0547800&SSO2-UID=
+# BBC Radio 2 : Music & Entertainment mms://wmlive.bbc.net.uk/wms/bbc_ami/radio2/radio2_bb_live_int_eq1_sl0?BBC-UID=e44a970b22ffbda06a4e058b91802eba1c90682640d091dff269e685b0547800&SSO2-UID=
+# BBC Radio 3 : Classical, Jazz, World, Arts, Drama mms://wmlive.bbc.net.uk/wms/bbc_ami/radio3/radio3_bb_live_int_eq1_sl0?BBC-UID=e44a970b22ffbda06a4e058b91802eba1c90682640d091dff269e685b0547800&SSO2-UID=
+# BBC Radio 4 FM : Itelligent speech mms://wmlive.bbc.net.uk/wms/bbc_ami/radio4/radio4_bb_live_int_eq1_sl0?BBC-UID=e44a970b22ffbda06a4e058b91802eba1c90682640d091dff269e685b0547800&SSO2-UID=
+for alias in \
+    nrkp1='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-p1-128' \
+    nrkp2='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-p2-128' \
+    nrkp3='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-petre-128' \
+    nrkmpetre='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-mpetre-56' \
+    nrkklassisk='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-alltid-klassisk-128' \
+    nrknyheter='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-alltid-nyheter-128' \
+    nrksami='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-sami-radio-128' \
+    nrkstortinget='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-stortinget-128' \
+    nrkfolkemusikk='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-alltid-folkemusikk-128' \
+    nrkjazz='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-jazz-128' \
+    nrksport='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-sport-128' \
+    nrkurort='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-urort-128' \
+    nrkgull='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-gull-128' \
+    nrksuper='${HOME}/scripts/players_stop && run-stream http://radio.hiof.no/nrk-super-128' \
+    finter='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/franceinter/all/franceinterhautdebit.mp3' \
+    finterb='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/franceinter/all/franceinter-32k.mp3' \
+    fculture='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/franceculture/all/franceculturehautdebit.mp3' \
+    fcultureb='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/franceculture/all/franceculture-32k.mp3' \
+    fmuse='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/francemusique/all/francemusiquehautdebit.mp3' \
+    fmuseb='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/francemusique/all/francemusique-32k.mp3' \
+    lemvt='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/lemouv/all/lemouvhautdebit.mp3' \
+    lemvtb='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/lemouv/all/lemouv-32k.mp3' \
+    fbleuIF='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/fbidf/all/fbidfhautdebit.mp3' \
+    fbleuIFb='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/fbidf/all/fbidf-32k.mp3' \
+    fbleuBN='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/fbbassenormandie/all/fbbassenormandie.mp3' \
+    finfo='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/franceinfo/all/franceinfo.mp3' \
+    europe1='${HOME}/scripts/players_stop && run-stream http://vipicecast.yacast.net/europe1' \
+    europe2='${HOME}/scripts/players_stop && run-stream http://viplagardere.yacast.net/encodereurope2' \
+    skyrock='${HOME}/scripts/players_stop && run-stream mms://vipmms9.yacast.net/encoderskyrock' \
+    rfm='${HOME}/scripts/players_stop && run-stream mms://viplagardere.yacast.net/encoderrfm' \
+    rc='${HOME}/scripts/players_stop && run-stream mms://vipmms9.yacast.net/encoderrireetchansons' \
+    rmc='${HOME}/scripts/players_stop && run-stream http://vipicecast.yacast.net/rmc' \
+    rbfm='${HOME}/scripts/players_stop && run-stream http://vipicecast.yacast.net/bfm' \
+    nrj='${HOME}/scripts/players_stop && run-stream mms://vipnrj.yacast.net/encodernrj' \
+    cherie='${HOME}/scripts/players_stop && run-stream mms://vipnrj.yacast.net/encodercheriefm' \
+    nostalgie='${HOME}/scripts/players_stop && run-stream mms://vipmms9.yacast.net/encodernostalgie' \
+    bbcr1x='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r1x.ram' \
+    bbcr1='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r1.ram' \
+    bbcr2='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r2.ram' \
+    bbcr3='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r3.ram' \
+    bbcr4='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r4.ram' \
+    bbcr4lw='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r4lw.ram' \
+    bbcr5l='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r5l.ram' \
+    bbcr5lsp='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r5lsp.ram' \
+    bbcr6='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r6.ram' \
+    bbcr7='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/r7.ram' \
+    bbcran='${HOME}/scripts/players_stop && run-playlist http://bbc.co.uk/radio/listen/live/ran.ram' \
+    bbcrws='${HOME}/scripts/players_stop && run-playlist http://www.bbc.co.uk/worldservice/meta/tx/nb/live_infent_au_nb.ram' \
+    bbcrl='${HOME}/scripts/players_stop && run-stream http://wmlive.bbc.co.uk/wms/england/lrlondon' \
+    bbcrcymru='${HOME}/scripts/players_stop && run-stream http://wmlive.bbc.co.uk/wms/nations/cymru' \
+    bbcrulster='${HOME}/scripts/players_stop && run-stream http://wmlive.bbc.co.uk/wms/nations/ulster' \
+    bbcrwales='${HOME}/scripts/players_stop && run-stream http://wmlive.bbc.co.uk/wms/nations/wales' \
+    bbcrscotland='${HOME}/scripts/players_stop && run-stream http://wmlive.bbc.co.uk/wms/nations/scotland' \
+    bbcrnangaidheal='${HOME}/scripts/players_stop && run-stream http://wmlive.bbc.co.uk/wms/nations/nangaidheal' \
+    bbcrfoyle='${HOME}/scripts/players_stop && run-stream http://wmlive.bbc.co.uk/wms/nations/foyle' \
+    rnova='${HOME}/scripts/players_stop && run-stream http://broadcast.infomaniak.net:80/radionova-high.mp3' \
+    topmusic='${HOME}/scripts/players_stop && run-stream http://str0.creacast.com/topmusic1' \
+    swr1='${HOME}/scripts/players_stop && run-stream http://62.27.44.15:80/swr1bwlive/livestream.mp3' \
+    swr2='${HOME}/scripts/players_stop && run-stream http://62.26.214.248:80/swr2live/livestream.mp3' \
+    swr3='${HOME}/scripts/players_stop && run-stream http://edge.live.mp3.mdn.newmedia.nacamar.net/swr3live/livestream.mp3' \
+    swr4='${HOME}/scripts/players_stop && run-stream http://213.200.97.110:80/swr4bwlive/livestream.mp3' \
+    sudradio='${HOME}/scripts/players_stop && run-stream http://broadcast.infomaniak.ch/start-sud-high.mp3' \
+    rtl='${HOME}/scripts/players_stop && run-stream http://streaming.radio.rtl.fr/rtl-1-44-96' \
+    rtl2='${HOME}/scripts/players_stop && run-stream http://streaming.radio.rtl.fr/rtl2-1-44-96' \
+    FG='${HOME}/scripts/players_stop && run-stream http://fg.impek.tv:80' \
+    fip='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/fip/all/fiphautdebit.mp3' \
+    fipb='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/fip/all/fip-32k.mp3' \
+    fvivace='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/francevivace/all/francevivacehautdebit.mp3' \
+    fvivaceb='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/francevivace/all/francevivace-32k.mp3' \
+    SC='${HOME}/scripts/players_stop && run-stream http://mp3.live.tv-radio.com/sentiersdelacreation/all/sentiersdelacreation.mp3'
+do
+    alias $alias
+done
+
+
+# freebox radios
+for alias in \
+    fAdo="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100001" \
+    fLa_radio_de_la_mer="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212  rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100002" \
+    fEurope_1="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100004" \
+    fNova="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100005" \
+    fFrance_Inter="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100006" \
+    fNeo="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100007" \
+    fParenthese="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100008" \
+    fRadioscoop="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100009" \
+    fFrance_Info="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100010" \
+    fNRJ="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100011" \
+    fMFM="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100012" \
+    fRFI_Multilingues="${HOME}/scripts/players_stop && cvlc -I rc --rc-host localhost:4212 rtsp://mafreebox.freebox.fr/fbxtv_pub/stream\?namespace=1\&service=100013"
+do
+    alias $alias
+done

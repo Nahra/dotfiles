@@ -1,0 +1,201 @@
+# {{{ zsh
+# allow user to start zsh in given directory
+if [[ -n ${ZSH_DIRECTORY} ]] ; then
+    if [[ -d ${ZSH_DIRECTORY} ]] ; then
+        cd ${ZSH_DIRECTORY}
+    fi
+fi
+
+if [ "$DISPLAY" = "screen" ]; then
+    stty erase '^?'
+fi
+# }}}
+
+# {{{ ulimit
+#  ,----
+#  | [dope@painless:~]% ulimit -a
+#  | -t: cpu time (seconds)         2000
+#  | -f: file size (blocks)         500000
+#  | -d: data seg size (kbytes)     100000
+#  | -s: stack size (kbytes)        8192
+#  | -c: core file size (blocks)    0
+#  | -m: resident set size (kbytes) unlimited
+#  | -u: processes                  1791
+#  | -n: file descriptors           1024
+#  | -l: locked-in-memory size (kb) 50000
+#  | -v: address space (kb)         unlimited
+#  | -N 10: file locks              unlimited
+#  | [dope@painless:~]%
+#  `----
+#
+# Note: This settings protect *not* against 'fork'-bombs like
+#  $ (){ :|:&};:
+#  $ perl -e 'while(1){ fork();}'
+# but i don't care a pap for it. Trust me. I know what I'm doing. See
+# zshbuiltins(1) /ulimit for details.
+#ulimit -c 0
+#ulimit -d unlimited
+#ulimit -f unlimited
+#ulimit -l unlimited
+#ulimit -m unlimited
+#ulimit -n unlimited
+##ulimit -N unlimited
+#ulimit -s unlimited
+#ulimit -t unlimited
+#ulimit -u unlimited
+#ulimit -v unlimited
+
+#ulimit -c 0                   # prevent core files from being written at all
+#ulimit -d 1048576             # data seg size (kbytes)
+#if (( EUID == 0 )); then
+#   ulimit -f unlimited   # file size (blocks)
+#else
+#   ulimit -f 2000000     # file size (blocks)
+#fi
+#if [[ "`ulimit -l`" == unlimited ]]; then
+#   ulimit -l 1329304          # locked-in-memory size (kb)
+#fi
+#ulimit -m 3987912             # resident set size (kbytes)
+#ulimit -n 1024                # file descriptors
+#ulimit -s 8192                # stack size (kbytes)
+#ulimit -t unlimited           # cpu time (seconds)
+#ulimit -u 512                 # processes
+# }}}
+
+# {{{ url
+# If you now paste a url it will be magically quoted!
+# But it only works on 4.2.0 and later.
+if [ ${ZSH_VERSION//\./} -ge 420 ]; then
+    autoload -U url-quote-magic
+    zle -N self-insert url-quote-magic
+fi
+# }}}
+
+# {{{ security
+# If root, set unmask to 022 to prevent new files being created group and world writable
+#if (( EUID == 0 )); then
+#    umask 022
+#fi
+# Set the "umask" (see "man umask"): ie read and write for the owner only.
+#  ,----
+#  | umask 002 # relaxed   -rwxrwxr-x
+#  | umask 022 # cautious  -rwxr-xr-x
+#  | umask 027 # uptight   -rwxr-x---
+#  | umask 077 # paranoid  -rwx------
+#  | umask 066 # bofh-like -rw-------
+#  `----
+#
+umask 022
+
+# }}}
+
+# {{{ system
+# An array (colon separated list) containing the suffixes of files to
+# be ignored during filename completion. However, if completion only
+# generates files with suffixes in this list, then these files are
+# completed anyway.
+# Note: U can use ``ls **/*~*(${~${(j/|/)fignore}})(.)'' to list all
+#       plain files that do not have extensions listed in `fignore'
+fignore=( ,v .aux .toc .lot .lof .blg .bbl .bak .BAK .sav .old .o .trace .swp \~)
+
+# Setting abbreviation like 'iab' with Vim.. YES! Zsh _IS_ evil *hr*. I
+# use this instead of "global aliases".
+#  $ Igr<Space>
+# will be expanded to
+#  $ groff -s -p -t -e -Tlatin1 -mandoc
+# don't forget to add in ~/.zsh/zshbindings
+# bindkey     " "        my-expand-abbrev 
+typeset -A myiabs
+myiabs=(
+        "Im"    "| more"
+        "Ig"    "| grep"
+        "Ieg"   "| egrep"
+        "Iag"   "| agrep"
+        "Igr"   "groff -s -p -t -e -Tlatin1 -mandoc"
+        "Ip"    "| $PAGER"
+        "Ih"    "| head"
+        "It"    "| tail"
+        "Is"    "| sort"
+        "Iv"    "| $EDITOR"
+        "Iw"    "| wc"
+        "Ix"    "| xargs"
+)
+my-expand-abbrev() {
+    local MATCH
+    LBUFFER=${LBUFFER%%(#m)[_a-zA-Z0-9]#}
+    LBUFFER+=${myiabs[$MATCH]:-$MATCH}
+    zle self-insert
+}
+
+# fucking "dead.letter" *narf*
+if [ -e ~/dead.letter ]; then
+         mv ~/dead.letter ~/.dead_letter.`date +%Y%m%d-%R`
+fi
+# }}}
+
+# >painless< is a "what happend if< - box (OpenBSD -current) and *.core -
+# files is a matter of course :>
+if [ "$HOSTNAME" = vohfi ]; then
+    if
+        [[ -e ${HOME}/{zsh,irssi,perl,xmonad,firefox,opera}.core ]]; then
+        zmv -M '(*).core' ~/.Core-Files/'$1.core-`date +%Y%m%d-%S`' && echo "Checkout ~/.Core-Files"
+    fi
+fi
+
+# 'hash' often visited directorys
+#   Note: That's *not* variables or aliase!
+#  ,----
+#  | $ hash -d M=~/.mutt
+#  | $ M
+#  | ~/.mutt
+#  | $ echo $M
+#  |
+#  | $ pwd
+#  | /home/dope/.mutt
+#  | $ 
+#  `----
+#
+hash -d _S=~/.sigs
+hash -d A=~/ARCHIVES
+hash -d B=~/bin
+hash -d BK=~/public_html/BOOKMARKS
+hash -d D=~/Downloads
+hash -d E=~/.emacs.d
+hash -d F=/usr/pkg/share/zsh/$ZSH_VERSION/functions
+#hash -d I=~/.irssi
+hash -d I=~/IMGs
+hash -d L=~/.slang
+hash -d M=~/.mutt
+hash -d P=/usr/pkgsrc
+hash -d S=~/scripts
+hash -d T=~/tmp
+hash -d V=~/.vim
+hash -d Z=~/.zshrc.d
+
+
+# {{{ window title
+#case $TERM in
+#    *xterm*|rxvt|urxvtc|rxvt-256color|(dt|k|E)term)
+#       precmd () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" }
+#       preexec () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" }
+#   ;;
+#    screen)
+#        precmd () {
+#           print -Pn "\e]83;title \"$1\"\a"
+#           print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a"
+#       }
+#       preexec () {
+#           print -Pn "\e]83;title \"$1\"\a"
+#           print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a"
+#       }
+#   ;;
+#esac
+# }}}
+
+### vim:ft=zsh:foldmethod=marker
+###
+### Frank Terbeck <ft@bewatermyfriend.org>
+### Last-Modified: Fri Dec 12 11:16:29 2008
+###
+### URI: <http://ft.bewatermyfriend.org/comp/zsh.html>
+###

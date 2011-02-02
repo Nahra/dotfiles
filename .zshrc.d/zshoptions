@@ -1,0 +1,63 @@
+# These names are case insensitive and underscores are ignored. For
+# example, `allexport' is equivalent to `A__lleXP_ort'.
+
+# allow me to cd directly into a dir in $PORTS_DIR from anywhere
+#  $ cd shells && pwd
+#  /usr/ports/shells
+if [ "${OS}" = OpenBSD ]; then
+    cdpath=( ${PORTS_DIR} )
+fi
+
+autoload    history-search-end \
+            zrecompile \
+            zmv
+autoload -U zed \
+            zargs
+zmodload -i zsh/complist
+zmodload -e zsh/clone
+
+setopt  appendhistory \
+    inc_append_history \
+        autocd \
+        autopushd \
+     no_bgnice \
+        braceccl \
+        checkjobs \
+     no_clobber \
+        completeinword \
+        correctall \
+        equals \
+        extendedglob \
+        extendedhistory \
+        globdots \
+        histbeep \
+        histsavenodups \
+        histfindnodups \
+        hist_expire_dups_first \
+        hist_ignore_all_dups \
+        hist_ignore_dups \
+        hist_ignore_space \
+        hist_no_store \
+        hist_reduce_blanks \
+        hist_verify \
+        list_packed \
+        list_types \
+        longlistjobs \
+        nobeep \
+        nohup \
+        nolistbeep \
+        normstarsilent \
+        notify \
+        printeightbit \
+        pushdignoredups \
+        pushdminus \
+        pushdsilent \
+     no_rm_star_wait \
+        sharehistory \
+        shortloops
+
+unsetopt    autoparamslash \
+            bsdecho \
+            cdablevars \
+            flow_control \
+            menu_complete

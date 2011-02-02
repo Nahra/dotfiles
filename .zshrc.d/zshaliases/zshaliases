@@ -1,0 +1,446 @@
+case ${OS} in
+    linux*) source ${HOME}/.zshrc.d/zshaliases/zshaliases.linux ;;
+    netbsd*) source ${HOME}/.zshrc.d/zshaliases/zshaliases.netbsd ;;
+    openbsd) source ${HOME}/.zshrc.d/zshaliases/zshaliases.openbsd ;;
+esac
+source ${HOME}/.zshrc.d/zshaliases/zshaliases.radios
+source ${HOME}/.zshrc.d/zshaliases/zshaliases.tv
+
+
+# -- see `less ${^fpath}/zmv(N)` for more details.
+for alias in \
+    zcp='zmv -C' \
+    zln='zmv -L'
+do
+    alias $alias
+done
+
+
+for alias in \
+    sx='startx -- :0 -quiet -nolisten tcp -deferglyphs 16 -dpi 100 -br vt03' \
+    sx1='startx -- :1 -quiet -nolisten tcp -deferglyphs 16 -dpi 100 -br vt07' \
+    sx2='startx -- :2 -quiet -nolisten tcp -deferglyphs 16 -dpi 100 -br vt08' \
+    sx3='startx -- :3 -quiet -nolisten tcp -deferglyphs 16 -dpi 100 -br vt09' \
+    sx4='startx -- :4 -quiet -nolisten tcp -deferglyphs 16 -dpi 100 -br vt10' \
+    sx5='startx -- :5 -quiet -nolisten tcp -deferglyphs 16 -dpi 100 -br vt11' \
+    xpop='xprop | grep --color=none "WM_WINDOW_ROLE\|WM_CLASS" | xmessage -file - -center' \
+    XLock='xautolock -locknow'
+do
+    alias $alias
+done
+
+
+for alias in \
+    d='$EDITOR ~/desktop.ini' \
+    e='$EDITOR ~/.emacs.d/init.el' \
+    i='$EDITOR ~/.xinitrc' \
+    m='$EDITOR ~/muttrc' \
+    s='$EDITOR ~/.slrnrc' \
+    v='$EDITOR ~/.vimrc' \
+    x='$EDITOR ~/.xmonad/xmonad.hs' \
+    z='$EDITOR ~/.zshrc'
+do
+    alias $alias
+done
+
+
+for alias in \
+    r-x='chmod 755' \
+    r--='chmod 644' \
+    rwx='chmod 700' \
+    rw-='chmod 600'
+do
+    alias $alias
+done
+
+
+for alias in \
+    md='mkdir -p' \
+    rd='rmdir' \
+    ..='cd ..' \
+    ...='cd ../..' \
+    ....='cd ../../..' \
+    0="cd -" \
+    1="cd +1" \
+    2="cd +2" \
+    3="cd +3" \
+    4="cd +4" \
+    5="cd +5" \
+    6="cd +6" \
+    7="cd +7" \
+    7="cd +8" \
+    9="cd +9" \
+    bk="cd $HOME/public_html/BOOKMARKS/"
+do
+    alias $alias
+done
+
+
+#'ps?'='ps ax | grep ' \
+for alias in \
+    psg='ps auxww|grep -i' \
+    mps='ps -ao user,pcpu,start,command'
+do
+    alias $alias
+done
+
+
+#UP2low='for i in *(.); mv $i ${i:l}' \
+#low2UP='for i in *(.); mv $i ${i:u}'
+for alias in \
+    _GIF='convert -interlace LINE -verbose' \
+    _thumb='convert -geometry 100x100 -interlace LINE -verbose' \
+    _thumb150='convert -geometry 150x150 -interlace LINE -verbose' \
+    _thumb200='convert -geometry 200x200 -interlace LINE -verbose'
+do
+    alias $alias
+done
+
+
+for alias in \
+    news='slrn -C -n --kill-log /home/Nahra/.slang/KILL --spool' \
+    gnews='slrnpull -d /home/Nahra/nslrn/slrnpull -h news.cis.dfn.de'
+do
+    alias $alias
+done
+
+
+for alias in \
+   kmail='echo "[2] - Done      /bin/rm -rf ~ &"' \
+   gmail='mailfilter -r || getmail -v'
+do
+    alias $alias
+done
+
+
+# *very* often used!
+# lsr : lists all files in current directory recursively
+# lsed : shows empty directories
+# lsef : shows empty files
+# lsnd : newest directory
+# lsnf : newest file
+# lsnoext : lists files without any extension
+# lsnewfh : lists 10 newst files in hierarchy
+# lsx : only shows executables
+# also works :
+#    lsbigf='ls -lSh *(.) | grep -v total | head $@ 2&>/dev/null' \
+#    lssmallf='ls -lS -- *(.) | tail $@ 2&>/dev/null' \
+#    lspci='sudo pcictl /dev/pci0 list'
+#    du -sh * | awk '/[[:space:]]*[[:digit:]]+,*[[:digit:]]*M/' | sort -nr
+for alias in \
+    ll='ls -lA' \
+    lv='ls -lA|$PAGER' \
+    lsr='ls **/*(.)' \
+    lsd='ls -d *(/)' \
+    lsad='ls -d .*(/)' \
+    lsed='ls -d *(/^F)' \
+    lsef='ls *(.L0)' \
+    lsnoext='ls *~*.*(.)' \
+    lsnd='ls -ld *(/om[1])' \
+    lsnf='ls -l *(.om[1])' \
+    lsof='ls -l *(.Om[1])' \
+    lsnewf='ls -rtl *(.) | tail -n 30 $@ 2&>/dev/null' \
+    lsnewd='ls -rtld *(/) | tail -n 30 $@ 2&>/dev/null' \
+    lsnewfh='ls -lt **/*(D.om[1,10])' \
+    lsoldf='ls -tl *(.) | head $@ 2&>/dev/null' \
+    lsoldd='ls -tld *(/) | head $@ 2&>/dev/null' \
+    lssmallf='ls -Sl *(.oL[1,10])' \
+    lssmalld='du -d=1 $(ls -d *(/)) | sort -nr | tail -n 10 $@ 2&>/dev/null' \
+    lsbigf='ls -rSl *(.OL[1,10])' \
+    lsbigd='du -d=1 $(ls -d *(/)) | sort -n | tail -n 10 $@ 2&>/dev/null' \
+    lslargestf='sudo sh -c "find / -type f -size +10000 -print0 | xargs -0 du -m | sort -nr | head -10"' \
+    lslargestd='sudo sh -c "find / -type d -size +10000 -print0 | xargs -0 du -m | sort -nr | head -10"' \
+    lss='ls -l *(s,S,t) | head $@ 2&>/dev/null' \
+    lsx='ls -l *(*) | head $@ 2&>/dev/null' \
+    lsl='ls -l *(@[1,10])' \
+    lsw='ls -ld *(R,W,X.^ND/)'
+do
+    alias $alias
+done
+
+# perl
+alias cpan='sudo perl -MCPAN -eshell;'
+
+
+# vim
+#[ "$TERM" = "rxvt-unicode" ] && alias vim='TERM=xterm vim'
+#[ "$TERM" = "rxvt-unicode" ] && alias vimc='TERM=vt220 vim'
+
+
+# usefull for programing
+for alias in \
+    mktags='for i in **/*(/); do (cd $i; eval '\''ctags-exuberant *'\''); done; ctags-exuberant --file-scope=no -R' \
+    C='./configure' \
+    CH='./configure --help'
+do
+    alias $alias
+done
+
+
+# FS
+for alias in \
+    _mcd='sudo mount /VOLUMES/CDROM && cd /VOLUMES/CDROM' \
+    _ucd='cd ~ && sudo umount /VOLUMES/CDROM' \
+    burn="cdrecord -v speed=1 dev=/dev/rcd0d" \
+    format="fdformat /dev/rfd0a"
+do
+    alias $alias
+done
+
+
+# security
+# "-" is the same as the -l option for su (deprecated).
+for alias in \
+    lock='lock -np' \
+    su="su -l"
+do
+    alias $alias
+done
+
+
+# emacs
+# | $ find ${HOME} \( -name "*~" -o -name "#*#" -o -name ".*~" \) -exec rm -i {} \; # Remove all foo.bar~ and #foo# - Files; its equivalent to
+for alias in \
+    rmell='rm -if ${HOME}/**/(*\~|\#*\#)(DN)' \
+    bytecompile='emacs -batch -f batch-byte-compile'
+do
+    alias $alias
+done
+
+
+# GPG *sigh*
+for alias in \
+    encrypt.gpg='echo "WARNING: plaintext is not deleted!"; gpg --quiet -ear 0x47E322CE' \
+    get.pgpkey='gpg --keyserver pgp.mit.edu --recv-key 0x"$@"' \
+    mail.gpgkey='mail -s "GET keyid $@" pgp-public-keys@keys.pgp.net' \
+    sign.gpg='gpg --sign $*'
+do
+    alias $alias
+done
+
+
+# postscript, LaTeX and printing
+for alias in \
+    gif2ps='(giftopnm | pnm2ps)' \
+    jpeg2ps='(djpeg | pnm2ps)' \
+    pnm2ps='pnmtops -width 8.26 -height 11.69' \
+    png2ps='(pngtopnm | pnm2ps)' \
+    ps2psbook="(psbook | psnup -2 | tumble)" \
+    ps2A5-haefte="(psbook -s8 | psnup -4 )" \
+    sho='xdvi -s 2 -expert -geometry 1010x900+30+1030' \
+    _dvishow='xdvi -s 3 -expert -geometry 990x990'
+do
+    alias $alias
+done
+
+
+# Global aliases for redirection
+for alias in \
+    N="&>/dev/null" \
+    1N="1>/dev/null" \
+    2N="2>/dev/null" \
+    DN="/dev/null" \
+    PI="|"
+do
+    alias -g $alias
+done
+
+
+# suffix aliases 
+if [[ $ZSH_VERSION == 4.2.<0->* ]]; then
+
+    _browser_fts=(htm html fr de org net com gov at cx nl se dk dk php)
+    for ft in $_browser_fts ; do alias -s $ft=$BROWSER ; done
+
+    _editor_fts=(cpp cxx cc c hh h inl asc txt TXT tex)
+    for ft in $_editor_fts ; do alias -s $ft=$EDITOR ; done
+
+    _image_fts=(jpg jpeg png gif mng tiff tif xbm xpm)
+    for ft in $_image_fts ; do alias -s $ft=$XIVIEWER; done
+
+    _media_fts=(avi flac mpg mpeg ogm m4v mp3 mp4 wav wmv ogg ape rm mov mkv)
+    for ft in $_media_fts ; do alias -s $ft=mplayer ; done
+
+    for alias in \
+        bz2=show-archive \
+        tar=show-archive \
+        zip=show-archive \
+        gz=show-archive \
+        dvi=advi \
+        pdf=xpdf \
+        ps=gv \
+        djvu=djview \
+        chm=xchm
+    do
+        alias -s $alias
+    done
+fi
+
+
+# terminal type
+for alias in \
+    v1='export TERM=vt100' \
+    v2='export TERM=vt220' \
+    vx='export TERM=xterm-color'
+do
+    alias $alias
+done
+
+
+# RC
+for alias in \
+    cup='cvs -qz3 up -PAd' \
+    lci='ci -l' \
+    lco='co -zLT'
+do
+    alias $alias
+done
+
+
+# quick startup
+# start mutt/vim/zsh/jed without any setup
+for alias in \
+    null-irssi='irssi --config=/dev/null' \
+    null-jed='jed -n' \
+    null-mutt='mutt -n -f /dev/null -F /dev/null' \
+    null-screen="screen -c /dev/null" \
+    null-vim='vim -u NONE' \
+    null-zsh='zsh -f'
+do
+    alias $alias
+done
+
+
+# multimedia
+#    cvlc='cvlc --width 602 --height 360 --video-x 384 --video-y 86' \
+for alias in \
+    fbmplayer='players_stop && mplayer -quiet -slave -identify -vo fbdev2 -vf scale=1280:1024 "$@"' \
+    mpcam='players_stop && mplayer -quiet -slave -identify -profile cam' \
+    mpjpeg='players_stop && mplayer -quiet -slave -identify -profile jpeg' \
+    mpx11='players_stop && mplayer -quiet -slave -identify -profile x11' \
+    mpsdl='players_stop && mplayer -quiet -slave -identify -profile sdl' \
+    mmp3='players_stop && mplayer -quiet -slave -identify -profile stream' \
+    dvd1='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://1' \
+    dvd2='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://2' \
+    dvd3='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://3' \
+    dvd4='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://4' \
+    dvd5='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://5' \
+    dvd6='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://6' \
+    dvd7='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://7' \
+    dvd8='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://8' \
+    dvd9='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://9' \
+    dvd10='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://10' \
+    dvd11='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://11' \
+    dvd12='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://12' \
+    dvd13='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://13' \
+    dvd14='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://14' \
+    dvd15='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://15' \
+    dvd16='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://16' \
+    dvd17='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://17' \
+    dvd18='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://18' \
+    dvd19='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://19' \
+    dvd20='players_stop && mplayer -quiet -slave -identify -profile sdl dvd://20'
+do
+    alias $alias
+done
+
+
+
+# misc
+# top10 : get top 10 shell commands:
+#    TERMCMD_1='urxvtc' \
+#    TERMCMD_2='urxvtc -pe tabbed' \
+#    TERMCMD_3='Eterm' \
+#    whereis="whereis -p" \
+for alias in \
+    nbsdhangman='hangman -d /usr/share/dict/special/netbsd' \
+    utar="tar -xvzf" \
+    h='history' \
+    top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10' \
+    ncmpc="ncmpc -f ${HOME}/.ncmpc/config"
+do
+    alias $alias
+done
+
+
+# man
+#alias man="w3mman"
+#
+
+# Indent (according to GCS - Gnu Coding Standards)
+[[ -x `which indent` ]] && alias indent="indent -nbad -bap -nbc -bbo -bl -bli2 -bls -ncdb -nce -cp1 -cs -di2 -ndj -nfc1 -nfca -hnl -i2 -ip5 -lp -pcs -psl -nsc -nsob"
+
+alias sh_diff='diff -abBpur'
+
+# Edit my sigquotes ;-)
+alias esig="$EDITOR ~/.sigs/own-stuff"
+
+# Make a certificat
+alias cert="openssl req -new -x509 -nodes -out cert.pem -keyout cert.key -days 365"
+
+# *I* *HATE* *OpenGL*!!!11!
+alias gl="gcc  -L/usr/X11R6/lib -L/usr/X11/lib -lglut  -lGL -lGLU -lXi -lXmu -lXt -lXext -lSM -lm -lX11"
+alias ogl="g++  -L/usr/X11R6/lib -lglut -lGLU -lGL  -lXi -lXmu"
+# needed for some sources from CVS (fucking autohell *narf*)
+alias autofuck='aclocal && autoheader && libtoolize --copy --automake && automake --copy --add-missing && autoconf'
+
+#  VIM related aliases ;o) btw. ``$SHELL:t'' is a modifiers from the Z
+#  Shell. In other shells you can use ``${SHELL##*/}'' instead. Valid
+#  Modifiers can be found in ``info -f zsh -n Modifiers''.
+alias :w='echo "Dude.. thats $SHELL:t and *not* VI(M)!"'
+alias :q='echo "Dude.. thats $SHELL:t and *not* VI(M)!"'
+alias :wq='echo "Dude.. thats $SHELL:t and *not* VI(M)!"'
+
+#alias vi="${EDITOR}"
+#alias view="${EDITOR} -R"
+#alias ex="${EDITOR} -e"
+alias pltags="${VIMRUNTIME}/tools/pltags.pl"
+
+# quick&dirty mirror
+alias mirror="noglob wget --mirror --no-parent --timestamping --continue --recursive $1"
+#aliae mirror="wget --mirror --no-parent --convert-links"
+alias mirror2="wget -m -p -np"
+
+# access the database of ${HOME} (Note: This is for *OpenBSD*! Not for
+# Linux!
+#if [ "${OS}" = openbsd ]; then
+#    alias hupdatedb="updatedb --searchpaths="$HOME" --prunepaths="/" --fcodes=$HOME/.locatedb"
+#    alias hlocate="locate -d ${HOME}/.locatedb"
+#else
+    # That's for Linux (strictly speaking slocate under Slackware but
+    # it works with any distribution; slocate assumed). See
+    # <http://www.geekreview.org/slocate/> for details.
+#    if [[ "${OS}" =  "linux-gnu" ]] && [[ -x $(which slocate) ]] ; then
+#        alias hupdatedb="sudo updatedb -U ${HOME} --output=${HOME}/.locatedb -e /home/dope/tmp,/home/dope/MuttMail,/home/dope/.cpan"
+#        alias hlocate="slocate --database=${HOME}/.locatedb $@"
+#    else
+#        # That's for GNU updatedb
+#        alias hupdatedb="sudo updatedb --localpaths="$HOME" --output=$HOME/.locatedb --prunefs="/""
+#        alias hlocate="locate -d ${HOME}/.locatedb"
+#    fi
+#fi
+
+
+# Locales
+#alias emacs="LANG=C LC_CTYPE=C LC_MESSAGES=C emacs"
+#for alias in \
+#    mutt="LANG=fr_FR.ISO8859-15 LC_CTYPE=fr_FR.ISO8859-15 LC_MESSAGES=fr_FR.ISO8859-15 mutt -y" \
+#    slrn="LANG=fr_FR.ISO8859-15 LC_CTYPE=fr_FR.ISO8859-15 LC_MESSAGES=fr_FR.ISO8859-15 slrn --spool" \
+#    xcalc="LANG=C LC_CTYPE=C LC_MESSAGES=C xcalc" \
+#    xclipboard="LANG=C LC_CTYPE=C LC_MESSAGES=C xclipboard" \
+#    xclock="LANG=C LC_CTYPE=C LC_MESSAGES=C xclock" \
+#    xcutsel="LANG=C LC_CTYPE=C LC_MESSAGES=C xcutsel" \
+#    xditview="LANG=C LC_CTYPE=C LC_MESSAGES=C xditview" \
+#    xdvi="LANG=C LC_CTYPE=C LC_MESSAGES=C xdvi" \
+#    xedit="LANG=C LC_CTYPE=C LC_MESSAGES=C xedit" \
+#    xfig="LANG=C LC_CTYPE=C LC_MESSAGES=C xfig" \
+#    xfontsel="LANG=C LC_CTYPE=C LC_MESSAGES=C xfontsel" \
+#    xload="LANG=C LC_CTYPE=C LC_MESSAGES=C xload" \
+#    xman="env LANG=C LC_CTYPE=fr_FR.UTF-8 LC_MESSAGES=C xman" \
+#    xmessage="LANG=C LC_CTYPE=C LC_MESSAGES=C xmessage" \
+#    xmore="LANG=C LC_CTYPE=C LC_MESSAGES=C xmore" \
+#    xterm="LANG=C LC_CTYPE=C LC_MESSAGES=C xterm"
+#do
+#    alias $alias
+#done
+

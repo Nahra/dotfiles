@@ -1,0 +1,17 @@
+# Only non-root need this aliases
+if (( EUID != 0 )); then
+    for alias in \
+        pkg_add='sudo pkg_add' \
+        pkg_delete='sudo pkg_delete' \
+        upsrc="cd /usr/src && cvs -q up -Pd" \
+        upports="cd /usr && cvs -q get -P ports" \
+        Svar='make show=FLAVORS' \
+        Spversion='make show=VERSION' \
+        Scomm='make show=COMMENT' \
+        Swth='make show=DESCRIPTION' \
+        format="fdformat /dev/rfc0a"
+    do
+        alias $alias
+    done
+fi
+

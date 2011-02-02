@@ -1,0 +1,73 @@
+# {{{ Bindings
+# To find out the keynames to use
+#  | cat > /dev/null 
+#  or
+#  | od -c
+
+# l'association modifier-Left ou modifier-Right fonctionne uniquement sous X !
+# --> veiller a ce que les combinaisons soient valables sous ttyE0-4
+
+# bindings qui ont deja des valeurs par default
+bindkey "^[[3~"   delete-char                            # <Delete> | default : "^D" ou "^H" ou "^?"
+#bindkey "^[OH"    beginning-of-line                      # pour TERM=screen | default : "^A"
+bindkey "^[[1~"   beginning-of-line                      # pour TERM=screen|linux | default : "^A"
+bindkey "^[[7~"   beginning-of-line                      # pour TERM=rxvt|Eterm | default : "^A"
+bindkey "^[[H"    beginning-of-line                      # pour TERM=xterm ou mac pro | default : "^A"
+#bindkey "^[OF~"   end-of-line                            # pour TERM=screen | default : "^E"
+bindkey "^[[4~"   end-of-line                            # pour TERM=screen|linux | default : "^E"
+bindkey "^[[8~"   end-of-line                            # pour TERM=rxvt|Eterm | default : "^E"
+bindkey "^[[F"    end-of-line                            # pour TERM=xterm ou mac pro | default : "^E"
+#bindkey "^[[2~"   overwrite-mode                        # <Inser> | default : "^X^O"
+#bindkey "^K"      run-help                              # C-k | default : "^[H" ou "^[h"
+#bindkey "^P"      quote-line                            # C-p | default : "^['"
+#bindkey "^X"      what-cursor-position                  # C-x | default : "^X="
+#bindkey "^[[2^"   insert-last-word                      # C-<Inser> | default : "^[."
+#bindkey "^[a"     accept-and-hold                       # <Esc>-a | default : "^[A"
+bindkey "^[^[[C"  forward-word                           # M1-Right | default : "^[F" ou "^[f"
+bindkey "^[^[[D"  backward-word                          # M1-Left | default : "^[B" ou "^[b"
+bindkey "^[^[[A"  delete-word                            # M1-Up
+bindkey "^[^[[B"  backward-delete-word                   # M1-Down
+#bindkey "^[[5~"   history-search-backward               # PgUp | default : "^[p" ou "^[P"
+#bindkey "^[[6~"   history-search-forward                # PgDown | default : "^[n" ou "^[N"
+#bindkey "^[[5~"   up-line-or-history                    # PgUp | default : "^P" ou "^[OA"
+#bindkey "^[[6~"   down-line-or-history                  # PgDown | default : "^N" ou "^[OB"
+
+# ajout de bindings
+bindkey " "      magic-space                             # do history expansion on space
+bindkey "^R"     history-incremental-search-backward
+bindkey "^S"     history-incremental-search-forward
+bindkey "^[[A"   history-beginning-search-backward       # Up arrow
+bindkey "^[[B"   history-beginning-search-forward        # Down arrow
+#bindkey "^[[A"    up-line-or-search                      # up arrow for back-history-search
+#bindkey "^[[B"    down-line-or-search                    # down arrow for fwd-history-search
+bindkey "^I"     expand-or-complete-prefix               # assimilable to "ls<TAB>" | default : bindkey "^I"      expand-or-complete
+bindkey "\M-e"   expand-cmd-path                         # M1-e for expanding path of typed command : $ ls M1-e == /bin/ls
+
+# caphusos Tip
+bindkey "^[r"   run-with-sudo
+
+bindkey "^K"    kill-line
+bindkey "^V"    yank
+
+#bindkey     " "        my-expand-abbrev
+
+################################################
+# bindings par defaut a connaitre absolument : #
+#                                              #
+# "^Y" yank                                    #
+# "^[y" yank-pop                               #
+################################################
+#
+#bindkey " "       my-expand-abbrev                       # See ~/.zsh/zshmisc "/^myiabs" for details
+#bindkey "^Z"      which-command                          # C-z
+#bindkey "^H"      backward-delete-word
+#bindkey "\210"    backward-delete-word
+#bindkey "\377"    backward-delete-word
+#bindkey -s "\C-t" "dirs -v\rcd ~"                        # STRG+t
+#bindkey "^[[D"    backward-char                          # <-
+#bindkey "^[[C"    forward-char                           # ->
+#bindkey "\e[3~"   delete-char                            # DELETE
+#bindkey "\e[7~"   beginning-of-line                      # pour TERM=rxvt|Eterm
+#bindkey "\e[8~"   end-of-line                            # pour TERM=rxvt|Eterm
+
+# }}} 

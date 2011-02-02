@@ -1,0 +1,111 @@
+# Only non-root need this aliases
+if (( EUID != 0 )); then
+    # some stuff for gentoo (i compelled to use it sometimes *narf*)
+    if [ -e "/etc/gentoo-release" ]; then
+        for alias in \
+            emerge="sudo emerge" \
+            eupdatedb="sudo eupdatedb" \
+            etc-update="sudo etc-update" \
+            eix-sync="sudo eix-sync" \
+            dispatch-conf="sudo dispatch-conf"
+        do
+            alias $alias
+        done
+    fi
+    # See <http://www.swaret.org/> and <http://software.jaos.org> for details
+    if [ -e "/etc/slackware-version" ]; then
+        for alias in \
+            slapt-get="sudo slapt-get" \
+            swaret="sudo swaret" \
+            installpkg="sudo /sbin/installpkg" \
+            upgradepkg="sudo /sbin/upgradepkg" \
+            removepkg="sudo /sbin/removepkg" \
+            pkgtool="sudo /sbin/pkgtool" \
+            makepkg="sudo /sbin/makepkg"
+        do
+            alias $alias
+        done
+    fi
+    # CRUX 
+    if [ -x "/usr/bin/crux" ]; then
+        for alias in \
+            ports="sudo ports" \
+            prt-get="sudo prt-get" \
+            httpup="sudo httpup" \
+            httpup-repgen="sudo httpup-repgen" \
+            httpup-repgen2="sudo httpup-repgen2" \
+            prt-cache="sudo prt-cache" \
+            pkginfo="sudo pkginfo" \
+            pkgadd="sudo pkgadd" \
+            pkgmk="sudo pkgmk" \
+            pkgrm="sudo pkgrm"
+        do
+            alias $alias
+        done
+    fi
+    # debian
+    if [ -e "/etc/debian_version" ]; then
+        for alias in \
+            apt-get="sudo apt-get" \
+            apt-cache="sudo apt-cache" \
+            dpkg="sudo dpgk" \
+            aptitude="sudo aptitude" \
+            dpkg-reconfigure="sudo dpkg-reconfigure"
+        do
+            alias $alias
+        done
+    fi
+fi
+
+# Help
+if [ "${OS}" = netbsdelf ]; then
+    for alias in \
+        H-Curl='less /usr/pkg/share/doc/curl/FAQ' \
+        H-Irssi='less /usr/pkg/share/doc/irssi/manual.txt' \
+        H-Fetchmail='less /usr/pkg/share/doc/fetchmail/FAQ' \
+        H-Getmail='less /usr/pkg/share/doc/getmail/faq.txt' \
+        H-Mutt='less /usr/pkg/share/doc/mutt/manual.txt' \
+        H-Slrn='less /usr/pkg/share/doc/slrn/manual.txt' \
+        H-Zsh='less /usr/pkg/share/doc/zsh/FAQ'
+    do
+        alias $alias
+    done
+fi
+
+
+# fucking devices *narf*
+alias H-Devices='${PAGER:-less} /usr/src/linux/Documentation/devices.txt'
+
+
+alias pof="pkg_online_find"
+
+
+# grep wrapper with search highlighting (<http://www.acme.com/software/hgrep/>)
+# Only for non-linux systems needed (see below)
+if [ ! "${OSTYPE}" = linux-gnu ] && [[ -x ${commands[hgrep]} ]]; then
+#if [ ! "${OSTYPE}" = linux-gnu ] && [ -x  "$(which hgrep)" ]; then
+    alias grep='hgrep'
+else
+#  fi
+# FIXME: ``${(MS)$(grep --version 2>/dev/null)#GNU}'' shows me ``GNU''
+#        and export the variables correctly. But why (BY ZEUS FAT ASS)
+#        become ``GREP_{COLOR,OPTIONS}'' exported if the string ``GNU''
+#        unavailable?
+# Note: ``--color'' is a feature from GNU grep >=2.5 and i do *not*
+#       check for the available version, but only for ``GNU''!
+    if  [ "${OS}" = "linux-gnu"  ${(MS)$(grep --version 2>/dev/null)#{GNU}} ] ; then
+        export GREP_COLOR='0;31'
+        # *DO* *NOT* *USE* *--color=always*! ;-)
+        export GREP_OPTIONS='--color=auto'
+        alias hgrep='grep $GREP_OPTIONS $*'
+    fi
+    # use perl regular expression (it's evil. isn't it?)
+    if [ 0 -eq `echo $SHELL|grep --perl-regexp sh &>/dev/null; echo $?` ]; then
+        GRP='--perl-regexp'
+    else
+        GRP='--extended-regexp'
+    fi
+fi
+
+alias clj=~/.clojure/clj-env-dir
+alias skype='su skypeuser -c skype'
